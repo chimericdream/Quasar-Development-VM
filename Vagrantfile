@@ -57,6 +57,9 @@ Vagrant.configure("2") do |config|
         :sites_path   => $vm_sites_path,
         :server_port  => $vm_http_port,
         :listen_ports => [$vm_http_port, "443"]
+      },
+      :php => {
+        :timezone     => "America/Chicago",
       }
     })
 
