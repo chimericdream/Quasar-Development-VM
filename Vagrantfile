@@ -23,4 +23,6 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--memory", $vm_memory]
     vb.customize ["modifyvm", :id, "--cpus",   $vm_cpus]
   end
+
+  config.omnibus.chef_version = :latest
 end
