@@ -45,5 +45,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.log_level = $chef_log_level
+
+    chef.run_list = [
+        "recipe[quasarvm::default]"
+    ]
   end
 end
