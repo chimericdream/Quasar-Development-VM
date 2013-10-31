@@ -6,3 +6,5 @@ description      'Installs/Configures a Basic Web Development Server'
 version          '0.1.0'
 
 recipe "quasarvm", "Main Configuration"
+
+depends 'git'
