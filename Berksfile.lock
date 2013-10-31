@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "quasarvm": {
+      "path": "."
+    },
+    "apache2": {
+      "locked_version": "1.7.0"
+    }
+  }
+}
