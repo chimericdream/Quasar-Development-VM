@@ -1,0 +1,4 @@
+.vagrant
+config.local.rb
+provision.local.sh
+vendor/*
