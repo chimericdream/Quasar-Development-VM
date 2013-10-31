@@ -2,6 +2,10 @@
 
 The latest install instructions will always be available at https://github.com/chimericdream/Quasar-Development-VM
 
+## Latest Version
+
+The current version of the Quasar VM is 0.1.0.
+
 ## Installation
 
 1. Install the latest version of [Vagrant](http://downloads.vagrantup.com/)
