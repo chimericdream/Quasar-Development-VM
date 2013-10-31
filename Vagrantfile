@@ -5,9 +5,12 @@
 $vm_name          = "quasar-vm"
 $vm_cpus          = "1"
 $vm_memory        = "512"
+$vm_sites_path    = "/vagrantshare/www"
+
 # Host Information
 $host_os          = "Win"                      # Assume Windows because fewer things (such as NFS) are supported than on *nix
 $nfs_supported    = false
+$local_sites_path = ENV["HOME"] + "/Sites"
 
 # IP Addresses & Ports
 $vm_ip_address    = "66.66.66.10"
@@ -35,6 +38,9 @@ Vagrant.configure("2") do |config|
   # In case the host-only networks fails the box is availale via ssh at 2222, http at 8888 and MySQL at 3306
   config.vm.network :forwarded_port, guest: $vm_http_port,  host: $host_http_port
 
+  # Load the directory containing all the sites
+  config.vm.synced_folder $local_sites_path, $vm_sites_path, :nfs => $nfs_supported
+
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", $vm_memory]
     vb.customize ["modifyvm", :id, "--cpus",   $vm_cpus]
@@ -45,6 +51,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.log_level = $chef_log_level
+
+    chef.json.merge!({
+      :apache => {
+        :sites_path   => $vm_sites_path,
+        :server_port  => $vm_http_port,
+        :listen_ports => [$vm_http_port, "443"]
+      }
+    })
 
     chef.run_list = [
         "recipe[quasarvm::default]"
