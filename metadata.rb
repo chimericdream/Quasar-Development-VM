@@ -7,7 +7,6 @@ version          '0.2.0'
 
 recipe "quasarvm", "Main Configuration"
 recipe "quasarvm::apache", "Apache Configuration"
-recipe "quasarvm::php", "PHP Package Configuration"
 
 depends 'git'
 depends 'apache2'
