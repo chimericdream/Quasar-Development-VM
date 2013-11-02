@@ -78,7 +78,10 @@ Vagrant.configure("2") do |config|
 		  "8.8.8.8",        # Google
 		  "8.8.4.4"         # Google
 		]
-      }
+      },
+	  :npm      => {
+		:packages               => []
+	  }
     })
 
     chef.run_list = [
