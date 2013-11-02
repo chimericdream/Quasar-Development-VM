@@ -108,7 +108,28 @@ Vagrant.configure("2") do |config|
 		]
 	  },
 	  :ruby     => {
-	    :gems                   => []
+	    :gems                   => [
+		  {
+			:name    => "sass",
+			:version => "3.2.12",
+		  },
+		  {
+			:name    => "compass",
+			:version => "0.12.2",
+		  },
+		  {
+			:name    => "observr",
+			:version => "1.0.5",
+		  },
+		  {
+			:name    => "rev",
+			:version => "0.3.2",
+		  },
+		  {
+			:name    => "jekyll",
+			:version => "1.2.1",
+		  }
+		]
 	  }
     })
 
