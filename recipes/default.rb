@@ -23,3 +23,4 @@ include_recipe "ntp"
 
 include_recipe "quasarvm::npm"
 include_recipe "quasarvm::gems"
+include_recipe "quasarvm::python"
