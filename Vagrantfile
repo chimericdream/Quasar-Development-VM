@@ -16,6 +16,8 @@ $local_sites_path = ENV["HOME"] + "/Sites"
 $vm_ip_address    = "66.66.66.10"
 $vm_http_port     = 80
 $host_http_port   = 8088
+$vm_mysql_port    = 3306
+$host_mysql_port  = 3306   # Warning, mysql port configuration using 3306 will interfere with any locally run MySQL server.
 
 $chef_log_level   = :info
 
@@ -37,6 +39,7 @@ Vagrant.configure("2") do |config|
 
   # In case the host-only networks fails the box is availale via ssh at 2222, http at 8888 and MySQL at 3306
   config.vm.network :forwarded_port, guest: $vm_http_port,  host: $host_http_port
+  config.vm.network :forwarded_port, guest: $vm_mysql_port, host: $host_mysql_port
 
   # Load the directory containing all the sites
   config.vm.synced_folder $local_sites_path, $vm_sites_path, :nfs => $nfs_supported
@@ -53,14 +56,57 @@ Vagrant.configure("2") do |config|
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
-      :apache => {
-        :sites_path   => $vm_sites_path,
-        :server_port  => $vm_http_port,
-        :listen_ports => [$vm_http_port, "443"]
+      :apache   => {
+        :sites_path             => $vm_sites_path,
+        :server_port            => $vm_http_port,
+        :listen_ports           => [$vm_http_port, "443"]
       },
-      :php => {
-        :timezone     => "America/Chicago",
-      }
+      :mysql    => {
+        :port                   => $vm_mysql_port,
+        :bind_address           => $vm_ip_address,
+        :server_root_password   => "root",
+        :server_debian_password => "root",
+        :server_repl_password   => "root"
+      },
+      :php      => {
+        :timezone               => "America/Chicago",
+      },
+      :resolver => {
+        :nameservers            => [ 
+		  "208.67.222.222", # OpenDNS
+		  "208.67.220.220", # OpenDNS
+		  "8.8.8.8",        # Google
+		  "8.8.4.4"         # Google
+		]
+      },
+	  :npm      => {
+		:packages               => [
+		  {
+		    :name    => "less",
+			:version => "1.5.0",
+		  },
+		  {
+		    :name    => "recess",
+			:version => "1.1.9",
+		  },
+		  {
+		    :name    => "uglify-js",
+			:version => "2.4.1",
+		  },
+		  {
+			:name    => "jshint",
+			:version => "2.3.0",
+		  },
+		  {
+			:name    => "yui",
+			:version => "3.13.0",
+		  },
+		  {
+			:name    => "yuicompressor",
+			:version => "2.4.8",
+		  }
+		]
+	  }
     })
 
     chef.run_list = [

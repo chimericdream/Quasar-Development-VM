@@ -27,17 +27,23 @@
     "apache2": {
       "locked_version": "1.7.0"
     },
+    "mysql": {
+      "locked_version": "3.0.4"
+    },
+    "openssl": {
+      "locked_version": "1.1.0"
+    },
     "php": {
       "locked_version": "1.2.4"
     },
     "xml": {
       "locked_version": "1.1.2"
     },
-    "mysql": {
-      "locked_version": "3.0.4"
+    "resolver": {
+      "locked_version": "1.1.4"
     },
-    "openssl": {
-      "locked_version": "1.1.0"
+    "ntp": {
+      "locked_version": "1.4.0"
     }
   }
 }
