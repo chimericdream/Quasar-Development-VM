@@ -19,3 +19,4 @@ include_recipe "resolver"
 include_recipe "ntp"
 
 include_recipe "quasarvm::npm"
+include_recipe "quasarvm::gems"
