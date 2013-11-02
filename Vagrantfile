@@ -65,8 +65,8 @@ Vagrant.configure("2") do |config|
         :port                   => $vm_mysql_port,
         :bind_address           => $vm_ip_address,
         :server_root_password   => "root",
-        :server_debian_password => 'root',
-        :server_repl_password   => 'root'
+        :server_debian_password => "root",
+        :server_repl_password   => "root"
       },
       :php      => {
         :timezone               => "America/Chicago",
