@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: npm
-# Resource:: npm
+# Cookbook Name:: gem
+# Resource:: gem
 #
 # Author:: Sergey Balbeko <sergey@balbeko.com>
 #
@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-actions :install
+actions :install, :uninstall
 
 attribute :name, :name_attribute => true
 attribute :version, :default => nil
