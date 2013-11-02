@@ -136,7 +136,12 @@ Vagrant.configure("2") do |config|
 		]
 	  },
 	  :pypip    => {
-		:pips                   => []
+		:pips                   => [
+		  {
+			:name    => "django",
+			:version => "1.5.5",
+		  }
+		]
 	  }
     })
 
