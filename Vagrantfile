@@ -106,6 +106,9 @@ Vagrant.configure("2") do |config|
 			:version => "2.4.8",
 		  }
 		]
+	  },
+	  :ruby     => {
+	    :gems                   => []
 	  }
     })
 
