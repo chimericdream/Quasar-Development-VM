@@ -80,7 +80,32 @@ Vagrant.configure("2") do |config|
 		]
       },
 	  :npm      => {
-		:packages               => []
+		:packages               => [
+		  {
+		    :name    => "less",
+			:version => "1.5.0",
+		  },
+		  {
+		    :name    => "recess",
+			:version => "1.1.9",
+		  },
+		  {
+		    :name    => "uglify-js",
+			:version => "2.4.1",
+		  },
+		  {
+			:name    => "jshint",
+			:version => "2.3.0",
+		  },
+		  {
+			:name    => "yui",
+			:version => "3.13.0",
+		  },
+		  {
+			:name    => "yuicompressor",
+			:version => "2.4.8",
+		  }
+		]
 	  }
     })
 
