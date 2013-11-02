@@ -104,6 +104,10 @@ Vagrant.configure("2") do |config|
 		  {
 			:name    => "yuicompressor",
 			:version => "2.4.8",
+		  },
+		  {
+			:name    => "grunt",
+			:version => "0.4.1",
 		  }
 		]
 	  },
@@ -128,6 +132,14 @@ Vagrant.configure("2") do |config|
 		  {
 			:name    => "jekyll",
 			:version => "1.2.1",
+		  }
+		]
+	  },
+	  :pypip    => {
+		:pips                   => [
+		  {
+			:name    => "django",
+			:version => "1.5.5",
 		  }
 		]
 	  }

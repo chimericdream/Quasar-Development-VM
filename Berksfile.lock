@@ -44,6 +44,12 @@
     },
     "ntp": {
       "locked_version": "1.4.0"
+    },
+    "sqlite": {
+      "locked_version": "1.0.0"
+    },
+    "python": {
+      "locked_version": "1.4.0"
     }
   }
 }
