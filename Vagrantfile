@@ -104,6 +104,10 @@ Vagrant.configure("2") do |config|
 		  {
 			:name    => "yuicompressor",
 			:version => "2.4.8",
+		  },
+		  {
+			:name    => "grunt",
+			:version => "0.4.1",
 		  }
 		]
 	  },
