@@ -12,3 +12,4 @@ recipe "quasarvm::php", "PHP Package Configuration"
 depends 'git'
 depends 'apache2'
 depends 'php'
+depends 'resolver'
