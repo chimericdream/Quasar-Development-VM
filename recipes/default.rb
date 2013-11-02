@@ -1,3 +1,5 @@
+include_recipe "yum::epel"
+
 include_recipe "git"
 
 include_recipe "apache2"
