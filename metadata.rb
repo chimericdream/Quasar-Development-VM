@@ -7,6 +7,7 @@ version          '0.2.0'
 
 recipe "quasarvm", "Main Configuration"
 recipe "quasarvm::apache", "Apache Configuration"
+recipe "quasarvm::npm", "Install Node.js and NPM Packages"
 
 depends 'git'
 depends 'apache2'
