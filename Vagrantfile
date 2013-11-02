@@ -134,6 +134,9 @@ Vagrant.configure("2") do |config|
 			:version => "1.2.1",
 		  }
 		]
+	  },
+	  :pypip    => {
+		:pips                   => []
 	  }
     })
 

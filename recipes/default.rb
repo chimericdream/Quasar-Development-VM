@@ -17,7 +17,10 @@ include_recipe "php::module_mysql"
 include_recipe "resolver"
 include_recipe "sqlite"
 
+include_recipe "python"
+
 include_recipe "ntp"
 
 include_recipe "quasarvm::npm"
 include_recipe "quasarvm::gems"
+include_recipe "quasarvm::python"

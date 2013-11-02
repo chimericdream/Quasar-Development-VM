@@ -9,6 +9,7 @@ recipe "quasarvm", "Main Configuration"
 recipe "quasarvm::apache", "Apache Configuration"
 recipe "quasarvm::npm", "Install Node.js and NPM Packages"
 recipe "quasarvm::gems", "Install Ruby Gems"
+recipe "quasarvm::python", "Install Python Packages with PIP"
 
 depends 'git'
 depends 'apache2'
@@ -18,3 +19,4 @@ depends 'resolver'
 depends 'ntp'
 depends 'yum'
 depends 'sqlite'
+depends 'python'
