@@ -2,17 +2,16 @@
 
 # Basic VM Information
 #$vm_name          = "quasar-vm"
-$vm_memory        = "2048"
+#$vm_memory        = "1024"
 #$vm_cpus          = "1"
-$vm_sites_path    = "/vagrantshare/www"
+#$vm_sites_path    = "/vagrantshare/www"
 
 # Host Information
-$host_os          = "Win"
-$nfs_supported    = false
-$local_sites_path = "D:\\Code\\Web"   # Double slashes may be required e.g. "C:\\Users\\yourname\\Sites"
+#$host_os          = "Win"
+#$nfs_supported    = false
+#$local_sites_path = "D:\\local\\path\\here"   # Double slashes may be required for Windows hosts e.g. "C:\\Users\\yourname\\Sites"
 
 # Additional Shared Folders
-#$shared_folders["D:\\Code"] = '/vagrantshare/code'
 #$shared_folders["D:\\local\\path\\here"] = '/vm/path/here'
 #$shared_folders["D:\\local\\path\\here"] = '/vm/path/here'
 
