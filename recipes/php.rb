@@ -5,7 +5,7 @@ when "rhel", "fedora", "suse"
   include_recipe "yum::remi"
   
   
-  %w{php54 php54-pecl-apc php54-mysql php54-mbstring php54-ldap php54-intl php54-curl php54-gd gawk php54-xml php54-xmlrpc php54-pear}.each do |a_package|
+  %w{php php-pecl-apc php-mysql php-mbstring php-ldap php-intl php-curl php-gd gawk php-xml php-xmlrpc php-pear}.each do |a_package|
     package a_package
   end
 
