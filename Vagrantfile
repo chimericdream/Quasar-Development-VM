@@ -56,93 +56,93 @@ Vagrant.configure("2") do |config|
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
-      :apache   => {
-        :sites_path             => $vm_sites_path,
-        :server_port            => $vm_http_port,
-        :listen_ports           => [$vm_http_port, "443"]
+      :apache => {
+        :sites_path   => $vm_sites_path,
+        :server_port  => $vm_http_port,
+        :listen_ports => [$vm_http_port, "443"]
       },
-      :mysql    => {
+      :mysql => {
         :port                   => $vm_mysql_port,
         :bind_address           => $vm_ip_address,
         :server_root_password   => "root",
         :server_debian_password => "root",
         :server_repl_password   => "root"
       },
-      :php      => {
-        :timezone               => "America/Chicago",
+      :php => {
+        :timezone => "America/Chicago",
       },
       :resolver => {
-        :nameservers            => [ 
-		  "208.67.222.222", # OpenDNS
-		  "208.67.220.220", # OpenDNS
-		  "8.8.8.8",        # Google
-		  "8.8.4.4"         # Google
-		]
+        :nameservers => [ 
+		      "208.67.222.222", # OpenDNS
+		      "208.67.220.220", # OpenDNS
+		      "8.8.8.8",        # Google
+		      "8.8.4.4"         # Google
+		    ]
       },
-	  :npm      => {
-		:packages               => [
-		  {
-		    :name    => "less",
-			:version => "1.5.0",
-		  },
-		  {
-		    :name    => "recess",
-			:version => "1.1.9",
-		  },
-		  {
-		    :name    => "uglify-js",
-			:version => "2.4.1",
-		  },
-		  {
-			:name    => "jshint",
-			:version => "2.3.0",
-		  },
-		  {
-			:name    => "yui",
-			:version => "3.13.0",
-		  },
-		  {
-			:name    => "yuicompressor",
-			:version => "2.4.8",
-		  },
-		  {
-			:name    => "grunt",
-			:version => "0.4.1",
-		  }
-		]
-	  },
-	  :ruby     => {
-	    :gems                   => [
-		  {
-			:name    => "sass",
-			:version => "3.2.12",
-		  },
-		  {
-			:name    => "compass",
-			:version => "0.12.2",
-		  },
-		  {
-			:name    => "observr",
-			:version => "1.0.5",
-		  },
-		  {
-			:name    => "rev",
-			:version => "0.3.2",
-		  },
-		  {
-			:name    => "jekyll",
-			:version => "1.2.1",
-		  }
-		]
-	  },
-	  :pypip    => {
-		:pips                   => [
-		  {
-			:name    => "django",
-			:version => "1.5.5",
-		  }
-		]
-	  }
+	    :npm => {
+		    :packages => [
+		      {
+		        :name    => "less",
+			      :version => "1.5.0",
+		      },
+		      {
+		        :name    => "recess",
+			      :version => "1.1.9",
+		      },
+		      {
+		        :name    => "uglify-js",
+			      :version => "2.4.1",
+		      },
+		      {
+			      :name    => "jshint",
+			      :version => "2.3.0",
+		      },
+		      {
+			      :name    => "yui",
+			      :version => "3.13.0",
+		      },
+		      {
+			      :name    => "yuicompressor",
+			      :version => "2.4.8",
+		      },
+		      {
+			      :name    => "grunt",
+			      :version => "0.4.1",
+		      }
+		    ]
+      },
+	    :ruby => {
+	      :gems => [
+		      {
+			      :name    => "sass",
+			      :version => "3.2.12",
+		      },
+		      {
+			      :name    => "compass",
+			      :version => "0.12.2",
+		      },
+		      {
+			      :name    => "observr",
+			      :version => "1.0.5",
+		      },
+		      {
+			      :name    => "rev",
+			      :version => "0.3.2",
+		      },
+		      {
+			      :name    => "jekyll",
+			      :version => "1.2.1",
+		      }
+		    ]
+      },
+	    :pypip => {
+		    :pips => [
+		      {
+			      :name    => "django",
+			      :version => "1.5.5",
+		      }
+		    ]
+	    }
     })
 
     chef.run_list = [
