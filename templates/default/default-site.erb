@@ -25,7 +25,7 @@ NameVirtualHost *:<%= node[:apache][:server_port] %>
 		Order allow,deny
 		allow from all
 	</Directory>
-      
+
 	<Directory <%= node[:apache][:sites_path] %>>
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride All
@@ -48,6 +48,11 @@ NameVirtualHost *:<%= node[:apache][:server_port] %>
 	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.python\.(dev|prd)$
 	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
 	RewriteRule ^([a-zA-Z0-9-]+)\.python\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$2/public/$3
+
+	# *.sf.(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.sf\.(dev|prd)$
+	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
+	RewriteRule ^([a-zA-Z0-9-]+)\.sf\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$2/web/$3
 
 <% if node[:platform] == "centos" || node[:platform] == "redhat" || node[:platform] == "fedora" -%>
 	#
