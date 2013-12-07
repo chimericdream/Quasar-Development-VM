@@ -33,6 +33,12 @@ The current version of the Quasar VM is 0.5.0.
  * Vagrant 1.3.5
  * Ruby 1.9.3p448
 
+**Mac OS X 10.8.5**
+
+ * VirtualBox 4.2.18
+ * Vagrant 1.2.7
+ * Ruby 1.9.3p429
+
 ## Credits
 
 I could not have gotten much of this VM working without the help of Chris Escalante, a web developer at the University of Kansas. He built and maintains the VM used by our dev team, and many of the features in this VM are based on things I learned from his work.
