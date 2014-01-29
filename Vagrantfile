@@ -140,7 +140,11 @@ Vagrant.configure("2") do |config|
 		      {
 			      :name    => "django",
 			      :version => "1.5.5",
-		      }
+		      },
+          {
+            :name    => "pyechonest",
+            :version => "8.0.1",
+          }
 		    ]
 	    }
     })

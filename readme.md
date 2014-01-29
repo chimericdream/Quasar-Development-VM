@@ -4,12 +4,12 @@ The latest install instructions will always be available at https://github.com/c
 
 ## Latest Version
 
-The current version of the Quasar VM is 0.6.0.
+The current version of the Quasar VM is 1.0.
 
 ## Installation
 
 1. Install the latest version of [Vagrant](http://downloads.vagrantup.com/)
-2. Install the latest<sup>1</sup> version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. Install the latest version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 3. Install the latest version of Ruby
 	* [Windows](http://rubyinstaller.org/downloads/)
 	* [Mac/Linux](http://rvm.io/)
@@ -22,29 +22,33 @@ The current version of the Quasar VM is 0.6.0.
 		* Vagrant VBGuest Plugin
 		* Vagrant Berkshelf Plugin
 		* Vagrant Omnibus Plugin
+	* The script may require admin rights to run, so if it fails, run the script  with `sudo`
 6. Start the VM
 	* `cd ~/vagrant/quasar-vm;vagrant up`
 
 ## Tested environments
 
-**Windows 8.1 64-bit**
+**Windows 8.1**
 
- * VirtualBox 4.2.18
+ * VirtualBox 4.2.x
  * Vagrant 1.3.5
- * Ruby 1.9.3p448
+ * Ruby 1.9.x
 
-**Mac OS X 10.8.5**
+**Mac OS X 10.8+**
 
- * VirtualBox 4.2.18
- * Vagrant 1.2.7
- * Ruby 1.9.3p429
+ * VirtualBox 4.3.x
+ * Vagrant 1.3.x
+ * Ruby 1.9.x
+
+**Ubuntu **
+
+ * VirtualBox 4.2.x
+ * Vagrant 1.3.x
+ * Ruby 1.8.x
 
 ## Credits
 
 I could not have gotten much of this VM working without the help of Chris Escalante, a web developer at the University of Kansas. He built and maintains the VM used by our dev team, and many of the features in this VM are based on things I learned from his work.
-
-## Footnotes
-1. There is a known issue with VirtualBox 4.3 that causes it to fail when creating the network interface. Therefore, use version 4.2.18 for the time being. [See here for more information.](https://github.com/mitchellh/vagrant/issues/2392)
 
 ## Copyright and License
 

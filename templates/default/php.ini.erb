@@ -7,6 +7,7 @@
 
 [PHP]
 
+
 ;;;;;;;;;;;
 ; WARNING ;
 ;;;;;;;;;;;
@@ -75,12 +76,10 @@
 ; Language Options ;
 ;;;;;;;;;;;;;;;;;;;;
 
-
-engine  = <%= node[:php5][:engine] %>
+engine = <%= node[:php5][:engine] %>
 
 ; Enable compatibility mode with Zend Engine 1 (PHP 4.x)
 zend.ze1_compatibility_mode = Off
-
 
 short_open_tag = <%= node[:php5][:short_open_tag] %>
 
@@ -606,7 +605,7 @@ default_socket_timeout = 60
 
 [Date]
 ; Defines the default timezone used by the date functions
-date.timezone = America/Chicago
+date.timezone = <%= node[:php5][:timezone] %>
 
 ;date.default_latitude = 31.7667
 ;date.default_longitude = 35.2333
