@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--cpus",   $vm_cpus]
   end
 
-  config.omnibus.chef_version = :latest
+  config.omnibus.chef_version = '11.8.2'
   config.berkshelf.enabled    = true
 
   config.vm.provision :chef_solo do |chef|
