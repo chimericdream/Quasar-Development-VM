@@ -108,6 +108,10 @@ Vagrant.configure("2") do |config|
 		      {
 			      :name    => "grunt",
 			      :version => "0.4.1",
+		      },
+		      {
+		        :name    => "grunt-cli",
+		        :version => "0.1.13"
 		      }
 		    ]
       },
