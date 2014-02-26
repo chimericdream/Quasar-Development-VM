@@ -136,19 +136,27 @@ Vagrant.configure("2") do |config|
 		      {
 			      :name    => "jekyll",
 			      :version => "1.2.1",
-		      }
-		    ]
+	      }
+	    ]
       },
-	    :pypip => {
-		    :pips => [
-		      {
+    :pypip => {
+	    :pips => [
+	      {
 			      :name    => "django",
 			      :version => "1.5.5",
-		      },
+	      },
           {
             :name    => "pyechonest",
             :version => "8.0.1",
-          }
+          },
+            {
+                :name    => "web.py",
+                :version => "0.37",
+            },
+            {
+                :name    => "flup",
+                :version => "1.0.2",
+            }
 		    ]
 	    }
     })
