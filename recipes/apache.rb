@@ -1,3 +1,7 @@
+apache_module "cgi" do
+   enable true
+end
+
 apache_module "substitute" do
    enable true
 end
