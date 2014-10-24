@@ -4,7 +4,7 @@ The latest install instructions will always be available at https://github.com/c
 
 ## Latest Version
 
-The current version of the Quasar VM is 1.1.0.
+The current version of the Quasar VM is 2.0.0a.
 
 ## Installation
 
@@ -18,33 +18,11 @@ The current version of the Quasar VM is 1.1.0.
 5. Run the setup script
 	* `cd ~/vagrant/quasar-vm;sh setup.sh`
 	* This script makes sure you have the following items installed:
-		* Berkshelf Ruby Gem
 		* Vagrant VBGuest Plugin
-		* Vagrant Berkshelf Plugin
 		* Vagrant Omnibus Plugin
 	* The script may require admin rights to run, so if it fails, run the script  with `sudo`
 6. Start the VM
 	* `cd ~/vagrant/quasar-vm;vagrant up`
-
-## Tested environments
-
-**Windows 8.1**
-
- * VirtualBox 4.2.x
- * Vagrant 1.3.5
- * Ruby 1.9.x
-
-**Mac OS X 10.8+**
-
- * VirtualBox 4.3.x
- * Vagrant 1.3.x
- * Ruby 1.9.x
-
-**Ubuntu **
-
- * VirtualBox 4.2.x
- * Vagrant 1.3.x
- * Ruby 1.8.x
 
 ## Credits
 
@@ -54,7 +32,7 @@ I could not have gotten much of this VM working without the help of Chris Escala
 
 The MIT License (MIT)
 
-Copyright (c) 2013 Bill Parrott
+Copyright (c) 2013-14 Bill Parrott
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
