@@ -10,15 +10,15 @@ when "rhel", "fedora", "suse"
   end
 
 when "debian"
-    apt_repository "php" do
+    apt_repository "php5" do
       uri "http://packages.dotdeb.org/"
-      distribution "wheezy"
+      distribution "wheezy-php56"
       components ["all"]
       key "http://www.dotdeb.org/dotdeb.gpg"
     end
     include_recipe "apt::default"
 
-    %w{php5 php5-dev php5-mysql php5-apc php5-intl php5-curl php5-gd gawk}.each do |a_package|
+    %w{php5 php5-dev php5-mysql php5-curl php5-gd gawk}.each do |a_package|
       package a_package
     end
 end

@@ -1,6 +1,0 @@
-name             'quasarvm'
-maintainer       'Bill Parrott'
-maintainer_email 'bill@chimericdream.com'
-license          'MIT License'
-description      'Installs/Configures a Basic Web Development Server'
-version          '2.0.0a'

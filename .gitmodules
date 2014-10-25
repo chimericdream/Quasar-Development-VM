@@ -1,0 +1,84 @@
+[submodule "cookbooks/git"]
+	path = cookbooks/git
+	url = https://github.com/jssjr/git.git
+[submodule "cookbooks/ntp"]
+	path = cookbooks/ntp
+	url = https://github.com/gmiranda23/ntp.git
+[submodule "cookbooks/yum"]
+	path = cookbooks/yum
+	url = https://github.com/opscode-cookbooks/yum.git
+[submodule "cookbooks/sqlite"]
+	path = cookbooks/sqlite
+	url = https://github.com/opscode-cookbooks/sqlite.git
+[submodule "cookbooks/python"]
+	path = cookbooks/python
+	url = https://github.com/poise/python.git
+[submodule "cookbooks/apache2"]
+	path = cookbooks/apache2
+	url = https://github.com/viverae-cookbooks/apache2.git
+[submodule "cookbooks/mysql"]
+	path = cookbooks/mysql
+	url = https://github.com/opscode-cookbooks/mysql.git
+[submodule "cookbooks/php"]
+	path = cookbooks/php
+	url = https://github.com/opscode-cookbooks/php.git
+[submodule "cookbooks/resolver"]
+	path = cookbooks/resolver
+	url = https://github.com/opscode-cookbooks/resolver.git
+[submodule "cookbooks/iptables"]
+	path = cookbooks/iptables
+	url = https://github.com/opscode-cookbooks/iptables.git
+[submodule "cookbooks/logrotate"]
+	path = cookbooks/logrotate
+	url = https://github.com/stevendanna/logrotate.git
+[submodule "cookbooks/build-essential"]
+	path = cookbooks/build-essential
+	url = https://github.com/opscode-cookbooks/build-essential.git
+[submodule "cookbooks/dmg"]
+	path = cookbooks/dmg
+	url = https://github.com/opscode-cookbooks/dmg.git
+[submodule "cookbooks/runit"]
+	path = cookbooks/runit
+	url = https://github.com/hw-cookbooks/runit.git
+[submodule "cookbooks/yum-epel"]
+	path = cookbooks/yum-epel
+	url = https://github.com/opscode-cookbooks/yum-epel.git
+[submodule "cookbooks/windows"]
+	path = cookbooks/windows
+	url = https://github.com/opscode-cookbooks/windows.git
+[submodule "cookbooks/chef_handler"]
+	path = cookbooks/chef_handler
+	url = https://github.com/opscode-cookbooks/chef_handler.git
+[submodule "cookbooks/yum-mysql-community"]
+	path = cookbooks/yum-mysql-community
+	url = https://github.com/opscode-cookbooks/yum-mysql-community.git
+[submodule "cookbooks/iis"]
+	path = cookbooks/iis
+	url = https://github.com/opscode-cookbooks/iis.git
+[submodule "cookbooks/xml"]
+	path = cookbooks/xml
+	url = https://github.com/opscode-cookbooks/xml.git
+[submodule "cookbooks/chef-sugar"]
+	path = cookbooks/chef-sugar
+	url = https://github.com/sethvargo/chef-sugar.git
+[submodule "cookbooks/apt"]
+	path = cookbooks/apt
+	url = https://github.com/opscode-cookbooks/apt.git
+[submodule "cookbooks/nodejs"]
+	path = cookbooks/nodejs
+	url = https://github.com/redguide/nodejs.git
+[submodule "cookbooks/ark"]
+	path = cookbooks/ark
+	url = https://github.com/burtlo/ark.git
+[submodule "cookbooks/7-zip"]
+	path = cookbooks/7-zip
+	url = https://github.com/sneal/7-zip.git
+[submodule "cookbooks/ohai"]
+	path = cookbooks/ohai
+	url = https://github.com/opscode-cookbooks/ohai.git
+[submodule "cookbooks/rbenv"]
+	path = cookbooks/rbenv
+	url = https://github.com/RiotGames/rbenv-cookbook.git
+[submodule "cookbooks/opscode-ruby"]
+	path = cookbooks/opscode-ruby
+	url = https://github.com/opscode-cookbooks/opscode-ruby.git

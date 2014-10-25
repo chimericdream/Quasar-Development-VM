@@ -14,10 +14,10 @@ $local_sites_path = ENV["HOME"] + "/Sites"
 
 # IP Addresses & Ports
 $vm_ip_address    = "66.66.66.10"
-$vm_http_port     = 80
-$host_http_port   = 8088
-$vm_mysql_port    = 3306
-$host_mysql_port  = 3306   # Warning, mysql port configuration using 3306 will interfere with any locally run MySQL server.
+$vm_http_port     = '80'
+$host_http_port   = '8088'
+$vm_mysql_port    = '3306'
+$host_mysql_port  = '3306'   # Warning, mysql port configuration using 3306 will interfere with any locally run MySQL server.
 
 $chef_log_level   = :info
 
@@ -49,5 +49,127 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--cpus",   $vm_cpus]
   end
 
-  config.omnibus.chef_version = '11.8.2'
+  config.omnibus.chef_version = '11.16.4'
+
+  config.vm.provision :chef_solo do |chef|
+    chef.log_level = $chef_log_level
+
+    chef.json.merge!({
+      :apache => {
+        :sites_path   => $vm_sites_path,
+        :server_port  => $vm_http_port,
+        :listen_ports => [$vm_http_port, "443"]
+      },
+      :mysql => {
+        :port                   => $vm_mysql_port,
+        :bind_address           => $vm_ip_address,
+        :server_root_password   => "root",
+        :server_debian_password => "root",
+        :server_repl_password   => "root"
+      },
+      :php => {
+        :timezone => "America/Chicago",
+      },
+      :resolver => {
+        :nameservers => [ 
+          "208.67.222.222", # OpenDNS
+          "208.67.220.220", # OpenDNS
+          "8.8.8.8",        # Google
+          "8.8.4.4"         # Google
+        ]
+      },
+      :npm => {
+        :packages => [
+          {
+            :name    => "bower",
+            :version => "1.3.12",
+          },
+          {
+            :name    => "less",
+            :version => "1.7.5",
+          },
+          {
+            :name    => "recess",
+            :version => ">=1.1.9",
+          },
+          {
+            :name    => "uglify-js",
+            :version => "2.4.15",
+          },
+          {
+            :name    => "jshint",
+            :version => "2.5.6",
+          },
+          {
+            :name    => "yui",
+            :version => "3.18.1",
+          },
+          {
+            :name    => "yuicompressor",
+            :version => "2.4.8",
+          },
+          {
+            :name    => "grunt",
+            :version => "0.4.5",
+          },
+          {
+            :name    => "grunt-cli",
+            :version => "0.1.13"
+          },
+          {
+            :name    => "gulp",
+            :version => "3.8.9",
+          }
+        ]
+      },
+      :ruby => {
+        :gems => [
+          {
+            :name    => "sass",
+            :version => "3.4.6",
+          },
+          {
+            :name    => "compass",
+            :version => "1.0.1",
+          },
+          {
+            :name    => "observr",
+            :version => "1.0.5",
+          },
+          {
+            :name    => "rev",
+            :version => "0.3.2",
+          },
+          {
+            :name    => "jekyll",
+            :version => "2.4.0",
+          }
+        ]
+      },
+      :pypip => {
+        :pips => [
+          {
+            :name    => "django",
+            :version => "1.7.1",
+          },
+          {
+            :name    => "pyechonest",
+            :version => "8.0.2",
+          },
+          {
+            :name    => "web.py",
+            :version => "0.37",
+          },
+          {
+            :name    => "flup",
+            :version => "1.0.2",
+          }
+        ]
+      }
+    })
+
+    chef.run_list = [
+      "recipe[quasarvm::default]"
+    ]
+  end
 end
