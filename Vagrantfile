@@ -55,6 +55,9 @@ Vagrant.configure("2") do |config|
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
+      :nginx => {
+        :user => "vagrant"
+      },
       :apache => {
         :sites_path   => $vm_sites_path,
         :server_port  => $vm_http_port,
@@ -67,9 +70,9 @@ Vagrant.configure("2") do |config|
         :server_debian_password => "root",
         :server_repl_password   => "root"
       },
-      :php => {
-        :timezone => "America/Chicago",
-      },
+#      :php => {
+#        :timezone => "America/Chicago",
+#      },
       :resolver => {
         :nameservers => [ 
           "208.67.222.222", # OpenDNS
@@ -171,5 +174,9 @@ Vagrant.configure("2") do |config|
     chef.run_list = [
       "recipe[quasarvm::default]"
     ]
+  end
+
+  if(File.file?("shell_provisioner.local.sh"))
+    config.vm.provision "shell", path: 'shell_provisioner.local.sh'
   end
 end
