@@ -58,11 +58,11 @@ Vagrant.configure("2") do |config|
       :nginx => {
         :user => "vagrant"
       },
-      :apache => {
-        :sites_path   => $vm_sites_path,
-        :server_port  => $vm_http_port,
-        :listen_ports => [$vm_http_port, "443"]
-      },
+#      :apache => {
+#        :sites_path   => $vm_sites_path,
+#        :server_port  => $vm_http_port,
+#        :listen_ports => [$vm_http_port, "443"]
+#      },
       :mysql => {
         :port                   => $vm_mysql_port,
         :bind_address           => $vm_ip_address,
@@ -176,7 +176,7 @@ Vagrant.configure("2") do |config|
     ]
   end
 
-  if(File.file?("shell_provisioner.local.sh"))
-    config.vm.provision "shell", path: 'shell_provisioner.local.sh'
+  if(File.file?("provision.local.sh"))
+    config.vm.provision "shell", path: 'provision.local.sh'
   end
 end

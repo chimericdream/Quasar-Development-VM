@@ -13,15 +13,9 @@
 [submodule "cookbooks/python"]
 	path = cookbooks/python
 	url = https://github.com/poise/python.git
-[submodule "cookbooks/apache2"]
-	path = cookbooks/apache2
-	url = https://github.com/viverae-cookbooks/apache2.git
 [submodule "cookbooks/mysql"]
 	path = cookbooks/mysql
 	url = https://github.com/opscode-cookbooks/mysql.git
-[submodule "cookbooks/php"]
-	path = cookbooks/php
-	url = https://github.com/opscode-cookbooks/php.git
 [submodule "cookbooks/resolver"]
 	path = cookbooks/resolver
 	url = https://github.com/opscode-cookbooks/resolver.git
