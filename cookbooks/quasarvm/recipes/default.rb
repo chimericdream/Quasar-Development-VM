@@ -1,11 +1,5 @@
 include_recipe "git"
 
-#include_recipe "apache2"
-#include_recipe "apache2::mod_php5"
-#include_recipe "apache2::mod_rewrite"
-
-#include_recipe "quasarvm::apache"
-
 include_recipe "php-fpm"
 
 php_fpm_pool "www"
@@ -40,5 +34,3 @@ end
 include_recipe "quasarvm::npm"
 include_recipe "quasarvm::gems"
 include_recipe "quasarvm::python"
-
-#include_recipe "quasarvm::php"

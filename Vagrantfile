@@ -56,13 +56,9 @@ Vagrant.configure("2") do |config|
 
     chef.json.merge!({
       :nginx => {
-        :user => "vagrant"
+        :user       => "vagrant",
+        :sites_path => $vm_sites_path
       },
-#      :apache => {
-#        :sites_path   => $vm_sites_path,
-#        :server_port  => $vm_http_port,
-#        :listen_ports => [$vm_http_port, "443"]
-#      },
       :mysql => {
         :port                   => $vm_mysql_port,
         :bind_address           => $vm_ip_address,
@@ -70,9 +66,6 @@ Vagrant.configure("2") do |config|
         :server_debian_password => "root",
         :server_repl_password   => "root"
       },
-#      :php => {
-#        :timezone => "America/Chicago",
-#      },
       :resolver => {
         :nameservers => [ 
           "208.67.222.222", # OpenDNS
