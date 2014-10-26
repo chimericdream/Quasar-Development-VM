@@ -59,6 +59,10 @@ Vagrant.configure("2") do |config|
         :user       => "vagrant",
         :sites_path => $vm_sites_path
       },
+      "php-fpm" => {
+        :user => "vagrant",
+        :group => "vagrant"
+      },
       :mysql => {
         :port                   => $vm_mysql_port,
         :bind_address           => $vm_ip_address,
