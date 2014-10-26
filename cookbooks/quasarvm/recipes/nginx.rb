@@ -4,7 +4,7 @@ nginx_site "local.dev" do
   host '~^(?<domain>[a-zA-Z0-9][a-zA-Z0-9\.-]*)\.(local|vm)\.(?<devprd>dev|prd)$'
   root "${domain}_${devprd}/public_html"
   index "index.php index.html index.htm"
-  location "try_files $uri $uri/ =404"
+  location "try_files $uri $uri/ /index.php?$query_string =404"
   phpfpm true
   template_cookbook "quasarvm"
   action [:delete, :create, :enable]
@@ -27,7 +27,7 @@ nginx_site "sf.dev" do
   host '~^(?<domain>[a-zA-Z0-9][a-zA-Z0-9\.-]*)\.sf\.(?<devprd>dev|prd)$'
   root "${domain}_${devprd}/web"
   index "index.php index.html index.htm"
-  location "try_files $uri $uri/ =404"
+  location "try_files $uri $uri/ /app_dev.php?$query_string =404"
   phpfpm true
   template_cookbook "quasarvm"
   action [:delete, :create, :enable]
