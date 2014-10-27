@@ -20,6 +20,7 @@ The current version of the Quasar VM is 2.0.0a.
 	* This script makes sure you have the following items installed:
 		* Vagrant VBGuest Plugin
 		* Vagrant Omnibus Plugin
+        * [Vagrant Proxy Configuration Plugin](tmatilai.github.io/vagrant-proxyconf/) (this plugin is optional but is installed if you use the setup script)
 	* The script may require admin rights to run, so if it fails, run the script  with `sudo`
 6. Start the VM
 	* `cd ~/vagrant/quasar-vm;vagrant up`

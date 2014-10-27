@@ -19,7 +19,15 @@ $host_http_port   = '8088'
 $vm_mysql_port    = '3306'
 $host_mysql_port  = '3306'   # Warning, mysql port configuration using 3306 will interfere with any locally run MySQL server.
 
+# Default Proxy Settings
+$http_proxy       = nil
+$https_proxy      = nil
+$noproxy_hosts    = "localhost,127.0.0.1"
+$proxy_enabled    = false
+
 $chef_log_level   = :info
+
+$chef_json_extra  = {}
 
 # Override any of the above settings for your local environment
 if(File.file?("config.local.rb"))
@@ -50,6 +58,13 @@ Vagrant.configure("2") do |config|
   end
 
   config.omnibus.chef_version = '11.16.4'
+
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+    config.proxy.http     = $http_proxy
+    config.proxy.https    = $https_proxy
+    config.proxy.no_proxy = $noproxy_hosts
+    config.proxy.enabled  = $proxy_enabled
+  end
 
   if(File.file?("beforechef.local.sh"))
     config.vm.provision "shell", path: 'beforechef.local.sh'
@@ -171,6 +186,8 @@ Vagrant.configure("2") do |config|
         ]
       }
     })
+
+    chef.json.merge!($chef_json_extra)
 
     chef.run_list = [
       "recipe[quasarvm::default]"
