@@ -51,6 +51,10 @@ Vagrant.configure("2") do |config|
 
   config.omnibus.chef_version = '11.16.4'
 
+  if(File.file?("beforechef.local.sh"))
+    config.vm.provision "shell", path: 'beforechef.local.sh'
+  end
+
   config.vm.provision :chef_solo do |chef|
     chef.log_level = $chef_log_level
 

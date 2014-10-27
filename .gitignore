@@ -1,4 +1,5 @@
 .vagrant
 config.local.rb
 provision.local.sh
+beforechef.local.sh
 vendor/*
