@@ -1,6 +1,17 @@
 include_recipe "git"
 
+include_recipe "apt"
+
+apt_repository 'php5-5.6' do
+  uri          'ppa:ondrej/php5-5.6'
+  distribution node['lsb']['codename']
+end
+
 include_recipe "php-fpm"
+
+%w{php5 php5-dev php5-mysql php5-curl php5-gd gawk}.each do |a_package|
+  package a_package
+end
 
 php_fpm_pool "www"
 

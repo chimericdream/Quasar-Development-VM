@@ -7,6 +7,7 @@ version          '2.0.0'
 
 recipe "quasarvm", "Main Configuration"
 recipe "quasarvm::nginx", "nginx Configuration"
+recipe "quasarvm::php", "PHP Configuration"
 recipe "quasarvm::npm", "Install Node.js and NPM Packages"
 recipe "quasarvm::gems", "Install Ruby Gems"
 recipe "quasarvm::python", "Install Python Packages with PIP"

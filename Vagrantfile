@@ -80,7 +80,9 @@ Vagrant.configure("2") do |config|
       },
       "php-fpm" => {
         :user => "vagrant",
-        :group => "vagrant"
+        :group => "vagrant",
+        :package_name => "php5-fpm",
+        :skip_repository_install => true
       },
       :mysql => {
         :port                   => $vm_mysql_port,
