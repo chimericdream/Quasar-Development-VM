@@ -12,6 +12,8 @@ $host_os          = "Win"                      # Assume Windows because fewer th
 $nfs_supported    = false
 $local_sites_path = ENV["HOME"] + "/Sites"
 
+$shared_folders   = Hash.new
+
 # IP Addresses & Ports
 $vm_ip_address    = "66.66.66.10"
 $vm_http_port     = '80'
@@ -52,6 +54,10 @@ Vagrant.configure("2") do |config|
   # Load the directory containing all the sites
   config.vm.synced_folder $local_sites_path, $vm_sites_path, :nfs => $nfs_supported
 
+  $shared_folders.each do |host_location, vm_location|
+    config.vm.synced_folder host_location, vm_location, :nfs => $nfs_supported
+  end
+
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", $vm_memory]
     vb.customize ["modifyvm", :id, "--cpus",   $vm_cpus]
@@ -89,7 +95,8 @@ Vagrant.configure("2") do |config|
         :bind_address           => $vm_ip_address,
         :server_root_password   => "root",
         :server_debian_password => "root",
-        :server_repl_password   => "root"
+        :server_repl_password   => "root",
+        :allow_remote_root      => true
       },
       :resolver => {
         :nameservers => [ 
