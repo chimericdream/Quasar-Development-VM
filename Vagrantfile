@@ -27,6 +27,14 @@ $https_proxy      = nil
 $noproxy_hosts    = "localhost,127.0.0.1"
 $proxy_enabled    = false
 
+# Default nginx Settings
+$load_site_configs    = true
+$cors_enabled         = true
+$cors_allowed_origins = ".*" # Allow requests from any origin. DO NOT LEAVE THIS AS-IS FOR A PRODUCTION SERVER
+$cors_allowed_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+$cors_allowed_headers = "Authorization,Content-Length,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since"
+$nginx_log_level      = "debug" # One of: [debug | info | notice | warn | error | crit | alert | emerg]
+
 $chef_log_level   = :info
 
 $chef_json_extra  = {}
@@ -81,8 +89,22 @@ Vagrant.configure("2") do |config|
 
     chef.json.merge!({
       :nginx => {
-        :user       => "vagrant",
-        :sites_path => $vm_sites_path
+        :user                => "vagrant",
+        :sites_path          => $vm_sites_path,
+        :enable_site_configs => $enable_site_configs,
+        :cors                => {
+          :enabled => $cors_enabled,
+          :origins => $cors_allowed_origins,
+          :methods => $cors_allowed_methods,
+          :headers => $cors_allowed_headers
+        },
+        :log_level           => $nginx_log_level,
+        :repository          => "ppa",
+        :repository_sources  => {
+          :ppa => {
+            :uri => "http://ppa.launchpad.net/nginx/development/ubuntu" # Required until nginx >= 1.7.5 is the stable version (we're using the "always" parameter on "add_header"
+          }
+        }
       },
       "php-fpm" => {
         :user => "vagrant",
