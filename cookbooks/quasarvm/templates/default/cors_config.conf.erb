@@ -64,30 +64,30 @@ if ($cors = "truedelete") {
   add_header 'Access-Control-Allow-Credentials' 'true' always;
   add_header 'Access-Control-Max-Age' 1728000 always;
   add_header 'Access-Control-Allow-Methods' '<%= node['nginx']['cors']['methods'].join(",") %>' always;
-add_header 'Access-Control-Allow-Headers' '<%= node['nginx']['cors']['headers'] %>' always;
+  add_header 'Access-Control-Allow-Headers' '<%= node['nginx']['cors']['headers'] %>' always;
 }
 <% end -%>
 
 # if it's OPTIONS, for a CORS preflight request, then respond immediately with no response body
 if ($cors = "trueoptions") {
-  add_header 'Access-Control-Allow-Origin' "$http_origin";
-  add_header 'Access-Control-Allow-Credentials' 'true';
+  add_header 'Access-Control-Allow-Origin' "$http_origin" always;
+  add_header 'Access-Control-Allow-Credentials' 'true' always;
 
   # Tell browser to cache this pre-flight info for 20 days
-  add_header 'Access-Control-Max-Age' 1728000;
+  add_header 'Access-Control-Max-Age' 1728000 always;
 
   # Tell browser which methods (e.g. GET,POST,OPTIONS) to respond to for CORS requests.
-  add_header 'Access-Control-Allow-Methods' '<%= node['nginx']['cors']['methods'].join(",") %>';
+  add_header 'Access-Control-Allow-Methods' '<%= node['nginx']['cors']['methods'].join(",") %>' always;
 
   # Tell browser we accept these headers in the actual request
-  add_header 'Access-Control-Allow-Headers' '<%= node['nginx']['cors']['headers'] %>';
+  add_header 'Access-Control-Allow-Headers' '<%= node['nginx']['cors']['headers'] %>' always;
 
   # build entire response to the preflight request
   # no body in this response
-  add_header 'Content-Length' 0;
+  add_header 'Content-Length' 0 always;
 
   # (should not be necessary, but included for non-conforming browsers)
-  add_header 'Content-Type' 'text/plain charset=UTF-8';
+  add_header 'Content-Type' 'text/plain charset=UTF-8' always;
 
   # indicate successful return with no content
   return 204;
