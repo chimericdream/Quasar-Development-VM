@@ -225,6 +225,10 @@ Vagrant.configure("2") do |config|
     ]
   end
 
+  if(File.file?("templates/mysql.local.sql"))
+    config.vm.provision "shell", inline: "mysql --user=root --password=root < templates/mysql.local.sql"
+  end
+
   if(File.file?("provision.local.sh"))
     config.vm.provision "shell", path: 'provision.local.sh'
   end
