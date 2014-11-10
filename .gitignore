@@ -3,3 +3,4 @@ config.local.rb
 provision.local.sh
 beforechef.local.sh
 vendor/*
+templates.local/*
