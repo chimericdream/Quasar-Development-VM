@@ -3,6 +3,8 @@ server {
   server_name <%= @host %>;
   root <%= node['nginx']['sites_path'] %>/<%= @root %>;
 
+  client_max_body_size 30M;
+
   error_page 404 = @default;
   error_page 405 = @default;
 
