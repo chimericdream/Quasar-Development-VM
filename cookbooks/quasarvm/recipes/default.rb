@@ -2,6 +2,8 @@ include_recipe "git"
 
 include_recipe "apt"
 
+include_recipe "java"
+
 apt_repository 'php5-5.6' do
   uri          'ppa:ondrej/php5-5.6'
   distribution node['lsb']['codename']
@@ -32,6 +34,8 @@ include_recipe "ntp"
 include_recipe "nodejs"
 include_recipe "nodejs::npm"
 
+include_recipe "mongodb::default"
+
 include_recipe "rbenv::default"
 include_recipe "rbenv::ruby_build"
 
@@ -41,6 +45,10 @@ rbenv_ruby "Ruby 1.9.3" do
   ruby_version "1.9.3-p545"
   global true
 end
+
+include_recipe "phantomjs::default"
+include_recipe "chrome::default"
+include_recipe "firefox::default"
 
 include_recipe "quasarvm::npm"
 include_recipe "quasarvm::gems"

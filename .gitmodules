@@ -82,3 +82,21 @@
 [submodule "cookbooks/php-fpm"]
 	path = cookbooks/php-fpm
 	url = https://github.com/yevgenko/cookbook-php-fpm.git
+[submodule "cookbooks/mongodb"]
+	path = cookbooks/mongodb
+	url = https://github.com/edelight/chef-mongodb.git
+[submodule "cookbooks/java"]
+	path = cookbooks/java
+	url = https://github.com/agileorbit-cookbooks/java.git
+[submodule "cookbooks/phantomjs"]
+	path = cookbooks/phantomjs
+	url = https://github.com/customink-webops/phantomjs.git
+[submodule "cookbooks/chocolatey"]
+	path = cookbooks/chocolatey
+	url = https://github.com/chocolatey/chocolatey-cookbook
+[submodule "cookbooks/firefox"]
+	path = cookbooks/firefox
+	url = https://github.com/tas50/Firefox
+[submodule "cookbooks/chrome"]
+	path = cookbooks/chrome
+	url = https://github.com/dhoer/chef-chrome

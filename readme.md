@@ -4,7 +4,7 @@ The latest install instructions will always be available at https://github.com/c
 
 ## Latest Version
 
-The current version of the Quasar VM is 2.0.0a.
+The current version of the Quasar VM is 2.0.0.
 
 ## Installation
 
@@ -33,7 +33,7 @@ I could not have gotten much of this VM working without the help of Chris Escala
 
 The MIT License (MIT)
 
-Copyright (c) 2013-14 Bill Parrott
+Copyright (c) 2013-15 Bill Parrott
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

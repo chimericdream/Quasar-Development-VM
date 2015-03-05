@@ -58,6 +58,8 @@ Vagrant.configure("2") do |config|
   # In case the host-only networks fails the box is availale via ssh at 2222, http at 8888 and MySQL at 3306
   config.vm.network :forwarded_port, guest: $vm_http_port,  host: $host_http_port
   config.vm.network :forwarded_port, guest: $vm_mysql_port, host: $host_mysql_port
+  config.vm.network :forwarded_port, guest: 3000, host: 3000, auto_correct: true
+  config.vm.network :forwarded_port, guest: 3131, host: 3131, auto_correct: true
 
   # Load the directory containing all the sites
   config.vm.synced_folder $local_sites_path, $vm_sites_path, :nfs => $nfs_supported
@@ -88,6 +90,13 @@ Vagrant.configure("2") do |config|
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
+      :phantomjs => {
+        :version             => '1.9.8'
+      },
+      :java => {
+        :install_flavor      => "openjdk",
+        :jdk_version         => 7
+      },
       :nginx => {
         :user                => "vagrant",
         :sites_path          => $vm_sites_path,
@@ -226,7 +235,7 @@ Vagrant.configure("2") do |config|
   end
 
   if(File.file?("templates/mysql.local.sql"))
-    config.vm.provision "shell", inline: "mysql --user=root --password=root < templates/mysql.local.sql"
+    config.vm.provision "shell", inline: "mysql --user=root --password=root < /vagrant/templates/mysql.local.sql"
   end
 
   if(File.file?("provision.local.sh"))
