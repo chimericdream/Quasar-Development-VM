@@ -71,6 +71,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", $vm_memory]
     vb.customize ["modifyvm", :id, "--cpus",   $vm_cpus]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
   config.omnibus.chef_version = '11.16.4'
