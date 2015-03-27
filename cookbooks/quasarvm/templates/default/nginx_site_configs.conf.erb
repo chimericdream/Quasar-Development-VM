@@ -1,0 +1,3 @@
+<% if node['nginx']['enable_site_configs'] %>
+include <%= node['nginx']['sites_path'] %>/*/nginx.conf;
+<% end %>

@@ -1,5 +1,6 @@
 .vagrant
-Berksfile.lock
 config.local.rb
 provision.local.sh
+beforechef.local.sh
 vendor/*
+templates/mysql.local.sql
