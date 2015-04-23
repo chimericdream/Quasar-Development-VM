@@ -100,3 +100,6 @@
 [submodule "cookbooks/chrome"]
 	path = cookbooks/chrome
 	url = https://github.com/dhoer/chef-chrome
+[submodule "cookbooks/apache2"]
+	path = cookbooks/apache2
+	url = https://github.com/svanzoest-cookbooks/apache2.git

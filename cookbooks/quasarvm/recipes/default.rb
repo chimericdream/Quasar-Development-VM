@@ -9,18 +9,30 @@ apt_repository 'php5-5.6' do
   distribution node['lsb']['codename']
 end
 
-include_recipe "php-fpm"
+if node['quasar']['webserver'] == "nginx"
+  include_recipe "php-fpm"
+end
 
 %w{php5 php5-curl php5-dev php5-gd php5-mcrypt php5-mysql php5-mysqlnd php5-odbc php5-pgsql php5-sqlite php5-sybase php5-tidy php5-xdebug php5-xmlrpc php5-xsl gawk}.each do |a_package|
   package a_package
 end
 
-php_fpm_pool "www"
+if node['quasar']['webserver'] == "nginx"
+  php_fpm_pool "www"
+end
 
-include_recipe "nginx"
-include_recipe "nginx::server"
+if node['quasar']['webserver'] == "apache"
+  include_recipe "apache2"
+  include_recipe "apache2::mod_php5"
+  include_recipe "apache2::mod_rewrite"
 
-include_recipe "quasarvm::nginx"
+  include_recipe "quasarvm::apache"
+else
+  include_recipe "nginx"
+  include_recipe "nginx::server"
+
+  include_recipe "quasarvm::nginx"
+end
 
 include_recipe "mysql::server"
 

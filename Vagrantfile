@@ -74,7 +74,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
-  config.omnibus.chef_version = '11.16.4'
+  config.omnibus.chef_version = '12.2.1'
 
   if Vagrant.has_plugin?("vagrant-proxyconf")
     config.proxy.http     = $http_proxy
@@ -88,17 +88,28 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
+    chef.custom_config_path = "Vagrantfile.chef"
+
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
+      :quasar    => {
+        :webserver => "apache"
+      },
+      :apache    => {
+        :default_site_enabled => true,
+        :sites_path           => $vm_sites_path,
+        :server_port          => $vm_http_port,
+        :listen_ports         => [$vm_http_port, "443"]
+      },
       :phantomjs => {
-        :version             => '1.9.8'
+        :version => '1.9.8'
       },
-      :java => {
-        :install_flavor      => "openjdk",
-        :jdk_version         => 7
+      :java      => {
+        :install_flavor => "openjdk",
+        :jdk_version    => 7
       },
-      :nginx => {
+      :nginx     => {
         :user                => "vagrant",
         :sites_path          => $vm_sites_path,
         :enable_site_configs => $enable_site_configs,
@@ -116,13 +127,13 @@ Vagrant.configure("2") do |config|
           }
         }
       },
-      "php-fpm" => {
-        :user => "vagrant",
-        :group => "vagrant",
-        :package_name => "php5-fpm",
+      "php-fpm"  => {
+        :user                    => "vagrant",
+        :group                   => "vagrant",
+        :package_name            => "php5-fpm",
         :skip_repository_install => true
       },
-      :mysql => {
+      :mysql     => {
         :port                   => $vm_mysql_port,
         :bind_address           => $vm_ip_address,
         :server_root_password   => "root",
@@ -130,7 +141,7 @@ Vagrant.configure("2") do |config|
         :server_repl_password   => "root",
         :allow_remote_root      => true
       },
-      :resolver => {
+      :resolver  => {
         :nameservers => [ 
           "208.67.222.222", # OpenDNS
           "208.67.220.220", # OpenDNS
@@ -138,7 +149,7 @@ Vagrant.configure("2") do |config|
           "8.8.4.4"         # Google
         ]
       },
-      :npm => {
+      :npm       => {
         :packages => [
           {
             :name    => "bower",
@@ -182,7 +193,7 @@ Vagrant.configure("2") do |config|
           }
         ]
       },
-      :ruby => {
+      :ruby      => {
         :gems => [
           {
             :name    => "sass",
@@ -206,7 +217,7 @@ Vagrant.configure("2") do |config|
           }
         ]
       },
-      :pypip => {
+      :pypip     => {
         :pips => [
           {
             :name    => "django",
