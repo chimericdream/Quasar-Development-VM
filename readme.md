@@ -4,7 +4,7 @@ The latest install instructions will always be available at https://github.com/c
 
 ## Latest Version
 
-The current version of the Quasar VM is 2.0.0.
+The current version of the Quasar VM is 2.0.0a.
 
 ## Installation
 
