@@ -66,7 +66,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
-  config.omnibus.chef_version = '11.16.4'
+  config.omnibus.chef_version = '12.2.1'
 
   if Vagrant.has_plugin?("vagrant-proxyconf")
     config.proxy.http     = $http_proxy
@@ -80,17 +80,25 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
+    chef.custom_config_path = "Vagrantfile.chef"
+
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
       :phantomjs => {
-        :version             => '1.9.8'
+        :version => '1.9.8'
       },
       :java => {
-        :install_flavor      => "openjdk",
-        :jdk_version         => 7
+        :install_flavor => "openjdk",
+        :jdk_version => 7
       },
+      :apache => {
+        :sites_path   => $vm_sites_path,
+        :server_port  => $vm_http_port,
+        :listen_ports => [$vm_http_port, "443"]
       },
+      :php => {
+        :timezone => "America/Chicago",
       },
       :mysql => {
         :port                   => $vm_mysql_port,
