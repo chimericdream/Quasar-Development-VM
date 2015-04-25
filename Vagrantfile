@@ -28,7 +28,7 @@ $noproxy_hosts    = "localhost,127.0.0.1"
 $proxy_enabled    = true
 
 # Default nginx Settings
-$load_site_configs    = true
+$enable_site_configs  = true
 $cors_enabled         = true
 $cors_allowed_origins = ".*" # Allow requests from any origin. DO NOT LEAVE THIS AS-IS FOR A PRODUCTION SERVER
 $cors_allowed_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
