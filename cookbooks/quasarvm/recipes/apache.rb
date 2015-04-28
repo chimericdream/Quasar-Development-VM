@@ -1,20 +1,10 @@
-apache_module "cgi" do
-   enable true
-end
-
-apache_module "substitute" do
-   enable true
-end
-
-apache_module "include" do
+%w{cgi substitute include rewrite proxy proxy_fcgi}.each do |a_mod|
+  apache_module a_mod do
     enable true
+  end
 end
 
-apache_module "rewrite" do
-    enable true
-end
-
-template "#{node[:apache][:dir]}/sites-available/default" do
+template "#{node[:apache][:dir]}/sites-available/quasar.conf" do
   source "default-site.erb"
   owner "root"
   group "root"
@@ -22,6 +12,6 @@ template "#{node[:apache][:dir]}/sites-available/default" do
   notifies :restart, resources(:service => "apache2"), :delayed
 end
 
-apache_site "default" do
+apache_site "quasar" do
   enable true
 end

@@ -1,5 +1,3 @@
-NameVirtualHost *:<%= node[:apache][:server_port] %>
-
 <VirtualHost *:<%= node[:apache][:server_port] %>>
 	EnableSendfile Off
 
@@ -15,24 +13,23 @@ NameVirtualHost *:<%= node[:apache][:server_port] %>
 	ServerSignature On
 
 	ServerName www.local.dev
-	ServerAlias *.vm.dev *.vm.prd *.local.dev *.local.prd *.python.dev *.python.prd
+	ServerAlias *.vm.dev *.vm.prd *.local.dev *.local.prd *.python.dev *.python.prd *.sf.dev *.sf.prd
 	ServerAdmin <%= node[:apache][:contact] %>
 	DocumentRoot <%= node[:apache][:sites_path] %>
 
 	<Directory />
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride All
-		Order allow,deny
-		allow from all
+		Require all granted
 	</Directory>
 
 	<Directory <%= node[:apache][:sites_path] %>>
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride All
-		Order allow,deny
-		allow from all
+		Require all granted
 	</Directory>
 
+	ProxyPassMatch ^/(.*\.php(/.*)?)$ unix:/var/run/php-fpm-www.sock|fcgi://127.0.0.1:9000<%= node[:apache][:sites_path] %>/
 	DirectoryIndex index.html index.php app.php index.shtml
 
 	RewriteEngine on
