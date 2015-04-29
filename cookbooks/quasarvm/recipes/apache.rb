@@ -1,4 +1,4 @@
-%w{cgi substitute include rewrite proxy proxy_fcgi}.each do |a_mod|
+%w{cgi substitute include rewrite headers proxy proxy_fcgi}.each do |a_mod|
   apache_module a_mod do
     enable true
   end

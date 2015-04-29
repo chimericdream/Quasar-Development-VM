@@ -120,23 +120,19 @@ Vagrant.configure("2") do |config|
         :packages => [
           {
             :name    => "bower",
-            :version => "1.3.12",
+            :version => "1.4.1",
           },
           {
             :name    => "less",
-            :version => "1.7.5",
-          },
-          {
-            :name    => "recess",
-            :version => ">=1.1.9",
+            :version => "2.5.0",
           },
           {
             :name    => "uglify-js",
-            :version => "2.4.15",
+            :version => "2.4.20",
           },
           {
             :name    => "jshint",
-            :version => "2.5.6",
+            :version => "2.7.0",
           },
           {
             :name    => "yui",
@@ -156,7 +152,7 @@ Vagrant.configure("2") do |config|
           },
           {
             :name    => "gulp",
-            :version => "3.8.9",
+            :version => "3.8.11",
           }
         ]
       },
@@ -164,11 +160,11 @@ Vagrant.configure("2") do |config|
         :gems => [
           {
             :name    => "sass",
-            :version => "3.4.6",
+            :version => "3.4.13",
           },
           {
             :name    => "compass",
-            :version => "1.0.1",
+            :version => "1.0.3",
           },
           {
             :name    => "observr",
@@ -180,7 +176,7 @@ Vagrant.configure("2") do |config|
           },
           {
             :name    => "jekyll",
-            :version => "2.4.0",
+            :version => "2.5.3",
           }
         ]
       },
@@ -188,11 +184,11 @@ Vagrant.configure("2") do |config|
         :pips => [
           {
             :name    => "django",
-            :version => "1.7.1",
+            :version => "1.8.0",
           },
           {
             :name    => "pyechonest",
-            :version => "8.0.2",
+            :version => "9.0.0",
           },
           {
             :name    => "web.py",
