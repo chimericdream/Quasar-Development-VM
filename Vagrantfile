@@ -17,7 +17,7 @@ $shared_folders   = Hash.new
 # IP Addresses & Ports
 $vm_ip_address    = "66.66.66.10"
 $vm_http_port     = '80'
-$host_http_port   = '8088'
+$host_http_port   = '8888'
 $vm_mysql_port    = '3306'
 $host_mysql_port  = '3306'   # Warning, mysql port configuration using 3306 will interfere with any locally run MySQL server.
 
@@ -169,10 +169,6 @@ Vagrant.configure("2") do |config|
           {
             :name    => "observr",
             :version => "1.0.5",
-          },
-          {
-            :name    => "rev",
-            :version => "0.3.2",
           },
           {
             :name    => "jekyll",

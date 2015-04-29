@@ -31,8 +31,8 @@ include_recipe "rbenv::ruby_build"
 
 include_recipe "rbenv::rbenv_vars"
 
-rbenv_ruby "Ruby 1.9.3" do
-  ruby_version "1.9.3-p545"
+rbenv_ruby "Ruby 2.2.2" do
+  ruby_version "2.2.2"
   global true
 end
 

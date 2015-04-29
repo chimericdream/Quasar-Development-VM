@@ -42,20 +42,35 @@
 
 	RewriteMap lowercase int:tolower
 
-	# **.*.(local|vm).(dev|prd)
-	RewriteCond ${lowercase:%{SERVER_NAME}} ^([a-zA-Z0-9-]+\.?)\.(local|vm)\.(dev|prd)$
+	# *.(local|vm).(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.(local|vm)\.(dev|prd)$
 	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
-	RewriteRule ^((?:[a-zA-Z0-9-]+\.?)+)\.(local|vm)\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$3/public_html/$4 
+	RewriteRule ^([a-zA-Z0-9-]+)\.(local|vm)\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$3/public_html/$4 
 
-	# **.*.python.(dev|prd)
-	RewriteCond ${lowercase:%{SERVER_NAME}} ^([a-zA-Z0-9-]+\.?)\.python\.(dev|prd)$
+	# *.*.(local|vm).(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+\.(local|vm)\.(dev|prd)$
 	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
-	RewriteRule ^((?:[a-zA-Z0-9-]+\.?)+)\.python\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$2/public/$3
+	RewriteRule ^([a-zA-Z0-9-]+)\.([a-zA-Z0-9-]+)\.(local|vm)\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1.$2_$4/public_html/$5 
 
-	# **.*.sf.(dev|prd)
-	RewriteCond ${lowercase:%{SERVER_NAME}} ^([a-zA-Z0-9-]+\.?)\.sf\.(dev|prd)$
+	# *.python.(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.python\.(dev|prd)$
 	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
-	RewriteRule ^((?:[a-zA-Z0-9-]+\.?)+)\.sf\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$2/web/$3
+	RewriteRule ^([a-zA-Z0-9-]+)\.python\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$2/public/$3
+
+	# *.*.python.(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+\.python\.(dev|prd)$
+	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
+	RewriteRule ^([a-zA-Z0-9-]+)\.([a-zA-Z0-9-]+)\.python\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1.$2_$3/public/$4
+
+	# *.sf.(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.sf\.(dev|prd)$
+	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
+	RewriteRule ^([a-zA-Z0-9-]+)\.sf\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$2/web/$3
+
+	# *.*.sf.(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+\.sf\.(dev|prd)$
+	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
+	RewriteRule ^([a-zA-Z0-9-]+)\.([a-zA-Z0-9-]+)\.sf\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1.$2_$3/web/$4
 
 <% if node[:platform] == "centos" || node[:platform] == "redhat" || node[:platform] == "fedora" -%>
 	#
