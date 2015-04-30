@@ -13,6 +13,7 @@ $nfs_supported    = false
 $local_sites_path = ENV["HOME"] + "/Sites"
 
 $shared_folders   = Hash.new
+$forwarded_ports  = Hash.new
 
 # IP Addresses & Ports
 $vm_ip_address    = "66.66.66.10"
@@ -24,7 +25,7 @@ $host_mysql_port  = '3306'   # Warning, mysql port configuration using 3306 will
 # Default Proxy Settings
 $http_proxy       = nil
 $https_proxy      = nil
-$noproxy_hosts    = nil
+$noproxy_hosts    = "localhost,127.0.0.1"
 $proxy_enabled    = true
 
 $chef_log_level   = :info
@@ -48,10 +49,12 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: $vm_ip_address
 
   # In case the host-only networks fails the box is availale via ssh at 2222, http at 8888 and MySQL at 3306
-  config.vm.network :forwarded_port, guest: $vm_http_port,  host: $host_http_port
-  config.vm.network :forwarded_port, guest: $vm_mysql_port, host: $host_mysql_port
-  config.vm.network :forwarded_port, guest: 3000, host: 3000, auto_correct: true
-  config.vm.network :forwarded_port, guest: 3131, host: 3131, auto_correct: true
+  config.vm.network :forwarded_port, guest: $vm_http_port,  host: $host_http_port,  auto_correct: true
+  config.vm.network :forwarded_port, guest: $vm_mysql_port, host: $host_mysql_port, auto_correct: true
+
+  $forwarded_ports.each do |host_port, vm_port|
+    config.vm.network :forwarded_port, guest: vm_port, host: host_port, auto_correct: true
+  end
 
   # Load the directory containing all the sites
   config.vm.synced_folder $local_sites_path, $vm_sites_path, :nfs => $nfs_supported

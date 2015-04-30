@@ -22,6 +22,10 @@
 #$vm_mysql_port    = 3306
 #$host_mysql_port  = 3306   # Warning, mysql port configuration using 3306 will interfere with any locally run MySQL server.
 
+# Additional Forwarded Ports
+#$forwarded_ports[host port #] = vm port #
+#$forwarded_ports[1234] = 1234
+
 # Default Proxy Settings
 #$http_proxy       = nil
 #$https_proxy      = nil
