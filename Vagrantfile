@@ -22,9 +22,9 @@ $vm_mysql_port    = '3306'
 $host_mysql_port  = '3306'   # Warning, mysql port configuration using 3306 will interfere with any locally run MySQL server.
 
 # Default Proxy Settings
-$http_proxy       = ""
-$https_proxy      = ""
-$noproxy_hosts    = "localhost,127.0.0.1"
+$http_proxy       = nil
+$https_proxy      = nil
+$noproxy_hosts    = nil
 $proxy_enabled    = true
 
 $chef_log_level   = :info
