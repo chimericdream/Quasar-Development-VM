@@ -76,12 +76,6 @@
 [submodule "cookbooks/opscode-ruby"]
 	path = cookbooks/opscode-ruby
 	url = https://github.com/opscode-cookbooks/opscode-ruby.git
-[submodule "cookbooks/nginx"]
-	path = cookbooks/nginx
-	url = https://github.com/phlipper/chef-nginx.git
-[submodule "cookbooks/php-fpm"]
-	path = cookbooks/php-fpm
-	url = https://github.com/yevgenko/cookbook-php-fpm.git
 [submodule "cookbooks/mongodb"]
 	path = cookbooks/mongodb
 	url = https://github.com/edelight/chef-mongodb.git
@@ -100,3 +94,9 @@
 [submodule "cookbooks/chrome"]
 	path = cookbooks/chrome
 	url = https://github.com/dhoer/chef-chrome
+[submodule "cookbooks/apache2"]
+	path = cookbooks/apache2
+	url = https://github.com/svanzoest-cookbooks/apache2.git
+[submodule "cookbooks/php-fpm"]
+	path = cookbooks/php-fpm
+	url = https://github.com/yevgenko/cookbook-php-fpm.git

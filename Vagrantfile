@@ -17,23 +17,15 @@ $shared_folders   = Hash.new
 # IP Addresses & Ports
 $vm_ip_address    = "66.66.66.10"
 $vm_http_port     = '80'
-$host_http_port   = '8088'
+$host_http_port   = '8888'
 $vm_mysql_port    = '3306'
 $host_mysql_port  = '3306'   # Warning, mysql port configuration using 3306 will interfere with any locally run MySQL server.
 
 # Default Proxy Settings
-$http_proxy       = ""
-$https_proxy      = ""
-$noproxy_hosts    = "localhost,127.0.0.1"
+$http_proxy       = nil
+$https_proxy      = nil
+$noproxy_hosts    = nil
 $proxy_enabled    = true
-
-# Default nginx Settings
-$enable_site_configs  = true
-$cors_enabled         = true
-$cors_allowed_origins = ".*" # Allow requests from any origin. DO NOT LEAVE THIS AS-IS FOR A PRODUCTION SERVER
-$cors_allowed_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-$cors_allowed_headers = "Authorization,Content-Length,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since"
-$nginx_log_level      = "debug" # One of: [debug | info | notice | warn | error | crit | alert | emerg]
 
 $chef_log_level   = :info
 
@@ -74,7 +66,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
-  config.omnibus.chef_version = '11.16.4'
+  config.omnibus.chef_version = '12.2.1'
 
   if Vagrant.has_plugin?("vagrant-proxyconf")
     config.proxy.http     = $http_proxy
@@ -88,39 +80,25 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
+    chef.custom_config_path = "Vagrantfile.chef"
+
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
       :phantomjs => {
-        :version             => '1.9.8'
+        :version => '1.9.8'
       },
       :java => {
-        :install_flavor      => "openjdk",
-        :jdk_version         => 7
+        :install_flavor => "openjdk",
+        :jdk_version => 7
       },
-      :nginx => {
-        :user                => "vagrant",
-        :sites_path          => $vm_sites_path,
-        :enable_site_configs => $enable_site_configs,
-        :cors                => {
-          :enabled => $cors_enabled,
-          :origins => $cors_allowed_origins,
-          :methods => $cors_allowed_methods,
-          :headers => $cors_allowed_headers
-        },
-        :log_level           => $nginx_log_level,
-        :repository          => "ppa",
-        :repository_sources  => {
-          :ppa => {
-            :uri => "http://ppa.launchpad.net/nginx/development/ubuntu" # Required until nginx >= 1.7.5 is the stable version (we're using the "always" parameter on "add_header"
-          }
-        }
+      :apache => {
+        :sites_path   => $vm_sites_path,
+        :server_port  => $vm_http_port,
+        :listen_ports => [$vm_http_port, "443"]
       },
-      "php-fpm" => {
-        :user => "vagrant",
-        :group => "vagrant",
-        :package_name => "php5-fpm",
-        :skip_repository_install => true
+      :php => {
+        :timezone => "America/Chicago",
       },
       :mysql => {
         :port                   => $vm_mysql_port,
@@ -142,23 +120,19 @@ Vagrant.configure("2") do |config|
         :packages => [
           {
             :name    => "bower",
-            :version => "1.3.12",
+            :version => "1.4.1",
           },
           {
             :name    => "less",
-            :version => "1.7.5",
-          },
-          {
-            :name    => "recess",
-            :version => ">=1.1.9",
+            :version => "2.5.0",
           },
           {
             :name    => "uglify-js",
-            :version => "2.4.15",
+            :version => "2.4.20",
           },
           {
             :name    => "jshint",
-            :version => "2.5.6",
+            :version => "2.7.0",
           },
           {
             :name    => "yui",
@@ -178,7 +152,7 @@ Vagrant.configure("2") do |config|
           },
           {
             :name    => "gulp",
-            :version => "3.8.9",
+            :version => "3.8.11",
           }
         ]
       },
@@ -186,23 +160,19 @@ Vagrant.configure("2") do |config|
         :gems => [
           {
             :name    => "sass",
-            :version => "3.4.6",
+            :version => "3.4.13",
           },
           {
             :name    => "compass",
-            :version => "1.0.1",
+            :version => "1.0.3",
           },
           {
             :name    => "observr",
             :version => "1.0.5",
           },
           {
-            :name    => "rev",
-            :version => "0.3.2",
-          },
-          {
             :name    => "jekyll",
-            :version => "2.4.0",
+            :version => "2.5.3",
           }
         ]
       },
@@ -210,11 +180,11 @@ Vagrant.configure("2") do |config|
         :pips => [
           {
             :name    => "django",
-            :version => "1.7.1",
+            :version => "1.8.0",
           },
           {
             :name    => "pyechonest",
-            :version => "8.0.2",
+            :version => "9.0.0",
           },
           {
             :name    => "web.py",
