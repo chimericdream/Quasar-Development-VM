@@ -72,6 +72,16 @@
 	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
 	RewriteRule ^([a-zA-Z0-9-]+)\.([a-zA-Z0-9-]+)\.sf\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1.$2_$3/web/$4
 
+	# *.jekyll.(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.jekyll\.(dev|prd)$
+	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
+	RewriteRule ^([a-zA-Z0-9-]+)\.jekyll\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1_$2/_site/$3 
+
+	# *.*.jekyll.(dev|prd)
+	RewriteCond ${lowercase:%{SERVER_NAME}} ^[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+\.jekyll\.(dev|prd)$
+	RewriteRule ^(.+) ${lowercase:%{SERVER_NAME}}$1 [C]
+	RewriteRule ^([a-zA-Z0-9-]+)\.([a-zA-Z0-9-]+)\.jekyll\.(dev|prd)/(.*) <%= node[:apache][:sites_path] %>/$1.$2_$3/_site/$4
+
 <% if node[:platform] == "centos" || node[:platform] == "redhat" || node[:platform] == "fedora" -%>
 	#
 	# This configuration file enables the default "Welcome"

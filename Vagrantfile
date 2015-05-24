@@ -176,6 +176,30 @@ Vagrant.configure("2") do |config|
           {
             :name    => "jekyll",
             :version => "2.5.3",
+          },
+          {
+            :name    => "jekyll-import",
+            :version => "0.7.1"
+          },
+          {
+            :name    => "unidecode",
+            :version => "1.0.0"
+          },
+          {
+            :name    => "sequel",
+            :version => "4.22.0"
+          },
+          {
+            :name    => "mysql2",
+            :version => "0.3.18"
+          },
+          {
+            :name    => "htmlentities",
+            :version => "4.3.3"
+          },
+          {
+            :name    => "jekyll-pandoc",
+            :version => "0.0.8"
           }
         ]
       },

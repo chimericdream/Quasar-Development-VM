@@ -31,6 +31,14 @@ include_recipe "rbenv::ruby_build"
 
 include_recipe "rbenv::rbenv_vars"
 
+package "ruby-dev" do
+  action :install
+end
+
+package "libmysqlclient-dev" do
+  action :install
+end
+
 rbenv_ruby "Ruby 2.2.2" do
   ruby_version "2.2.2"
   global true
