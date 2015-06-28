@@ -57,16 +57,36 @@ Vagrant.configure("2") do |config|
   end
 
   # Load the directory containing all the sites
-  config.vm.synced_folder $local_sites_path, $vm_sites_path, :nfs => $nfs_supported
+  if(!$host_os.eql?("Win"))
+    config.vm.synced_folder $local_sites_path, $vm_sites_path, :nfs => $nfs_supported
 
-  $shared_folders.each do |host_location, vm_location|
-    config.vm.synced_folder host_location, vm_location, :nfs => $nfs_supported
+    $shared_folders.each do |host_location, vm_location|
+      config.vm.synced_folder host_location, vm_location, :nfs => $nfs_supported
+    end
   end
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", $vm_memory]
     vb.customize ["modifyvm", :id, "--cpus",   $vm_cpus]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+
+    if($host_os.eql?("Win"))
+      vb.customize ["sharedfolder", "add", :id, "--name", "www", "--hostpath", (("//?/" + $local_sites_path).gsub("/","\\"))]
+
+      $shared_folders.keys.each_with_index do |host_location, idx|
+        vb.customize ["sharedfolder", "add", :id, "--name", "shared_#{idx}", "--hostpath", (("//?/" + host_location).gsub("/","\\"))]
+      end
+    end
+  end
+
+  if($host_os.eql?("Win"))
+    config.vm.provision :shell, inline: "mkdir -p #{$vm_sites_path}", run: "always"
+    config.vm.provision :shell, inline: "mount -t vboxsf -rw -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` www #{$vm_sites_path}", run: "always"
+
+    $shared_folders.values.each_with_index do |vm_location, idx|
+      config.vm.provision :shell, inline: "mkdir -p #{vm_location}", run: "always"
+      config.vm.provision :shell, inline: "mount -t vboxsf -rw -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` shared_#{idx} #{vm_location}", run: "always"
+    end
   end
 
   config.omnibus.chef_version = '12.2.1'
@@ -88,20 +108,14 @@ Vagrant.configure("2") do |config|
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
-      :phantomjs => {
-        :version => '1.9.8'
-      },
-      :java => {
-        :install_flavor => "openjdk",
-        :jdk_version => 7
-      },
       :apache => {
         :sites_path   => $vm_sites_path,
         :server_port  => $vm_http_port,
         :listen_ports => [$vm_http_port, "443"]
       },
-      :php => {
-        :timezone => "America/Chicago",
+      :java => {
+        :install_flavor => "openjdk",
+        :jdk_version => 7
       },
       :mysql => {
         :port                   => $vm_mysql_port,
@@ -111,6 +125,91 @@ Vagrant.configure("2") do |config|
         :server_repl_password   => "root",
         :allow_remote_root      => true
       },
+      :nodejs => {
+        :version => '0.12.5'
+      },
+      :npm => {
+        :packages => [
+          {
+            :name    => "bower",
+            :version => "^1.4.1",
+          },
+          {
+            :name    => "grunt",
+            :version => "^0.4.5",
+          },
+          {
+            :name    => "grunt-cli",
+            :version => "^0.1.13"
+          },
+          {
+            :name    => "gulp",
+            :version => "^3.9.0",
+          },
+          {
+            :name    => "jshint",
+            :version => "^2.8.0",
+          },
+          {
+            :name    => "less",
+            :version => "^2.5.0",
+          },
+          {
+            :name    => "oc",
+            :version => "^0.16.9"
+          },
+          {
+            :name    => "strongloop",
+            :version => "^4.0.5"
+          },
+          {
+            :name    => "uglify-js",
+            :version => "^2.4.23",
+          },
+          {
+            :name    => "yui",
+            :version => "^3.18.1",
+          },
+          {
+            :name    => "yuicompressor",
+            :version => "^2.4.8",
+          }
+        ]
+      },
+      "opscode-ruby" => {
+        :versions => ['1.9.3-p551', '2.0.0-p645', '2.1.6', '2.2.2', '2.3.0-dev', 'rbx-2.5.5'],
+        :global => '2.2.2'
+      },
+      :phantomjs => {
+        :version => '1.9.8'
+      },
+      :php => {
+        :timezone => "America/Chicago",
+      },
+      :pypip => {
+        :pips => [
+          {
+            :name    => "django",
+            :version => "1.8.2",
+          },
+          {
+            :name    => "flup",
+            :version => "1.0.2",
+          },
+          {
+            :name    => "pyechonest",
+            :version => "9.0.0",
+          },
+          {
+            :name    => "web.py",
+            :version => "0.37",
+          }
+        ]
+      },
+      :rbenv => {
+        :user  => "vagrant",
+        :group => "vagrant"
+      },
       :resolver => {
         :nameservers => [ 
           "208.67.222.222", # OpenDNS
@@ -119,59 +218,15 @@ Vagrant.configure("2") do |config|
           "8.8.4.4"         # Google
         ]
       },
-      :npm => {
-        :packages => [
-          {
-            :name    => "bower",
-            :version => "1.4.1",
-          },
-          {
-            :name    => "less",
-            :version => "2.5.0",
-          },
-          {
-            :name    => "uglify-js",
-            :version => "2.4.20",
-          },
-          {
-            :name    => "jshint",
-            :version => "2.7.0",
-          },
-          {
-            :name    => "yui",
-            :version => "3.18.1",
-          },
-          {
-            :name    => "yuicompressor",
-            :version => "2.4.8",
-          },
-          {
-            :name    => "grunt",
-            :version => "0.4.5",
-          },
-          {
-            :name    => "grunt-cli",
-            :version => "0.1.13"
-          },
-          {
-            :name    => "gulp",
-            :version => "3.8.11",
-          }
-        ]
-      },
       :ruby => {
         :gems => [
-          {
-            :name    => "sass",
-            :version => "3.4.13",
-          },
           {
             :name    => "compass",
             :version => "1.0.3",
           },
           {
-            :name    => "observr",
-            :version => "1.0.5",
+            :name    => "htmlentities",
+            :version => "4.3.3"
           },
           {
             :name    => "jekyll",
@@ -182,44 +237,56 @@ Vagrant.configure("2") do |config|
             :version => "0.7.1"
           },
           {
-            :name    => "unidecode",
-            :version => "1.0.0"
+            :name    => "jekyll-lunr-js-search",
+            :version => "0.3.0"
           },
           {
-            :name    => "sequel",
-            :version => "4.22.0"
+            :name    => "jekyll-mentions",
+            :version => "0.2.1"
+          },
+          {
+            :name    => "jekyll-pandoc",
+            :version => "0.0.8"
+          },
+          {
+            :name    => "jekyll-redirect-from",
+            :version => "0.8.0"
+          },
+          {
+            :name    => "jekyll-sitemap",
+            :version => "0.8.1"
+          },
+          {
+            :name    => "jekyll_figure",
+            :version => "0.0.3"
+          },
+          {
+            :name    => "jemoji",
+            :version => "0.5.0"
           },
           {
             :name    => "mysql2",
             :version => "0.3.18"
           },
           {
-            :name    => "htmlentities",
-            :version => "4.3.3"
+            :name    => "observr",
+            :version => "1.0.5",
           },
           {
-            :name    => "jekyll-pandoc",
-            :version => "0.0.8"
-          }
-        ]
-      },
-      :pypip => {
-        :pips => [
-          {
-            :name    => "django",
-            :version => "1.8.0",
+            :name    => "rubysl-shellwords",
+            :version => "2.0.0"
           },
           {
-            :name    => "pyechonest",
-            :version => "9.0.0",
+            :name    => "sass",
+            :version => "3.4.15",
           },
           {
-            :name    => "web.py",
-            :version => "0.37",
+            :name    => "sequel",
+            :version => "4.23.0"
           },
           {
-            :name    => "flup",
-            :version => "1.0.2",
+            :name    => "unidecode",
+            :version => "1.0.0"
           }
         ]
       }
