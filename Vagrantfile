@@ -177,11 +177,8 @@ Vagrant.configure("2") do |config|
         ]
       },
       "opscode-ruby" => {
-        :versions => ['1.9.3-p551', '2.0.0-p645', '2.1.6', '2.2.2', '2.3.0-dev', 'rbx-2.5.5'],
-        :global => '2.2.2'
-      },
-      :phantomjs => {
-        :version => '1.9.8'
+        :versions => ['1.9.3-p551', '2.0.0-p645', '2.1.6', '2.2.4', '2.3.0-dev', 'rbx-2.5.5'],
+        :global => '2.2.4'
       },
       :php => {
         :timezone => "America/Chicago",

@@ -39,12 +39,11 @@ package "libmysqlclient-dev" do
   action :install
 end
 
-rbenv_ruby "Ruby 2.2.2" do
-  ruby_version "2.2.2"
+rbenv_ruby "Ruby 2.2.4" do
+  ruby_version "2.2.4"
   global true
 end
 
-include_recipe "phantomjs::default"
 include_recipe "chrome::default"
 include_recipe "firefox::default"
 
