@@ -41,5 +41,8 @@
 #$nginx_log_level      = "debug" # One of: [debug | info | notice | warn | error | crit | alert | emerg]
 
 #$chef_log_level   = :info  #:debug, :info, :warn, :error, or :fatal (ArgumentError) 
-
 #$chef_json_extra  = {}
+
+#$node_modules["name"] = "version"
+#$ruby_gems["name"]    = "version"
+#$python_pips["name"]  = "version"

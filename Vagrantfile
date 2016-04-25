@@ -29,12 +29,39 @@ $noproxy_hosts    = "localhost,127.0.0.1"
 $proxy_enabled    = true
 
 $chef_log_level   = :info
-
 $chef_json_extra  = {}
+
+$node_modules     = Hash.new
+$ruby_gems        = Hash.new
+$python_pips      = Hash.new
 
 # Override any of the above settings for your local environment
 if(File.file?("config.local.rb"))
   require_relative 'config.local.rb'
+end
+
+$npm_array         = Array.new
+$node_modules.each do |n, v|
+  $npm_array.push({
+    :name    => "#{n}",
+    :version => "#{v}"
+  })
+end
+
+$ruby_array        = Array.new
+$ruby_gems.each do |n, v|
+  $ruby_array.push({
+    :name    => "#{n}",
+    :version => "#{v}"
+  })
+end
+
+$python_array      = Array.new
+$python_pips.each do |n, v|
+  $python_array.push({
+    :name    => "#{n}",
+    :version => "#{v}"
+  })
 end
 
 Vagrant.configure("2") do |config|
@@ -129,52 +156,7 @@ Vagrant.configure("2") do |config|
         :version => '0.12.5'
       },
       :npm => {
-        :packages => [
-          {
-            :name    => "bower",
-            :version => "^1.4.1",
-          },
-          {
-            :name    => "grunt",
-            :version => "^0.4.5",
-          },
-          {
-            :name    => "grunt-cli",
-            :version => "^0.1.13"
-          },
-          {
-            :name    => "gulp",
-            :version => "^3.9.0",
-          },
-          {
-            :name    => "jshint",
-            :version => "^2.8.0",
-          },
-          {
-            :name    => "less",
-            :version => "^2.5.0",
-          },
-          {
-            :name    => "oc",
-            :version => "^0.16.9"
-          },
-          {
-            :name    => "strongloop",
-            :version => "^4.0.5"
-          },
-          {
-            :name    => "uglify-js",
-            :version => "^2.4.23",
-          },
-          {
-            :name    => "yui",
-            :version => "^3.18.1",
-          },
-          {
-            :name    => "yuicompressor",
-            :version => "^2.4.8",
-          }
-        ]
+        :packages => $npm_array
       },
       "opscode-ruby" => {
         :versions => ['1.9.3-p551', '2.0.0-p645', '2.1.6', '2.2.4', '2.3.0-dev', 'rbx-2.5.5'],
@@ -184,24 +166,7 @@ Vagrant.configure("2") do |config|
         :timezone => "America/Chicago",
       },
       :pypip => {
-        :pips => [
-          {
-            :name    => "django",
-            :version => "1.8.2",
-          },
-          {
-            :name    => "flup",
-            :version => "1.0.2",
-          },
-          {
-            :name    => "pyechonest",
-            :version => "9.0.0",
-          },
-          {
-            :name    => "web.py",
-            :version => "0.37",
-          }
-        ]
+        :pips => $python_array
       },
       :rbenv => {
         :user  => "vagrant",
@@ -216,76 +181,7 @@ Vagrant.configure("2") do |config|
         ]
       },
       :ruby => {
-        :gems => [
-          {
-            :name    => "compass",
-            :version => "1.0.3",
-          },
-          {
-            :name    => "htmlentities",
-            :version => "4.3.3"
-          },
-          {
-            :name    => "jekyll",
-            :version => "2.5.3",
-          },
-          {
-            :name    => "jekyll-import",
-            :version => "0.7.1"
-          },
-          {
-            :name    => "jekyll-lunr-js-search",
-            :version => "0.3.0"
-          },
-          {
-            :name    => "jekyll-mentions",
-            :version => "0.2.1"
-          },
-          {
-            :name    => "jekyll-pandoc",
-            :version => "0.0.8"
-          },
-          {
-            :name    => "jekyll-redirect-from",
-            :version => "0.8.0"
-          },
-          {
-            :name    => "jekyll-sitemap",
-            :version => "0.8.1"
-          },
-          {
-            :name    => "jekyll_figure",
-            :version => "0.0.3"
-          },
-          {
-            :name    => "jemoji",
-            :version => "0.5.0"
-          },
-          {
-            :name    => "mysql2",
-            :version => "0.3.18"
-          },
-          {
-            :name    => "observr",
-            :version => "1.0.5",
-          },
-          {
-            :name    => "rubysl-shellwords",
-            :version => "2.0.0"
-          },
-          {
-            :name    => "sass",
-            :version => "3.4.15",
-          },
-          {
-            :name    => "sequel",
-            :version => "4.23.0"
-          },
-          {
-            :name    => "unidecode",
-            :version => "1.0.0"
-          }
-        ]
+        :gems => $ruby_array
       }
     })
 
