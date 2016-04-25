@@ -153,7 +153,7 @@ Vagrant.configure("2") do |config|
         :allow_remote_root      => true
       },
       :nodejs => {
-        :version => '0.12.5'
+        :version => '4.4.3'
       },
       :npm => {
         :packages => $npm_array
