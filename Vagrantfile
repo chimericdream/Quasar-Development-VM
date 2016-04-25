@@ -153,7 +153,12 @@ Vagrant.configure("2") do |config|
         :allow_remote_root      => true
       },
       :nodejs => {
-        :version => '0.12.5'
+        :install_method => 'source',
+        :version        => '4.4.3',
+        :source         => {
+          :url      => "https://nodejs.org/dist/v4.4.3/node-v4.4.3.tar.gz",
+          :checksum => "8e67b95721aab7bd721179da2fe5dd97f9acc1306c15c9712ee103bcd6381638"
+        }
       },
       :npm => {
         :packages => $npm_array
