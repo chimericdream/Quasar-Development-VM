@@ -29,8 +29,6 @@
 		Require all granted
 	</Directory>
 
-	ProxyPassMatch ^/(.*\.php(/.*)?)$ unix:/var/run/php-fpm-www.sock|fcgi://127.0.0.1:9000<%= node[:apache][:sites_path] %>/
-
 	DirectoryIndex index.html index.php app.php index.shtml
 
 	Header set Access-Control-Allow-Origin "*"
