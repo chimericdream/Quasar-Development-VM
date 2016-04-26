@@ -97,6 +97,3 @@
 [submodule "cookbooks/apache2"]
 	path = cookbooks/apache2
 	url = https://github.com/svanzoest-cookbooks/apache2.git
-[submodule "cookbooks/php-fpm"]
-	path = cookbooks/php-fpm
-	url = https://github.com/yevgenko/cookbook-php-fpm.git
