@@ -130,8 +130,6 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
-    chef.custom_config_path = "Vagrantfile.chef"
-
     chef.log_level = $chef_log_level
 
     chef.json.merge!({
