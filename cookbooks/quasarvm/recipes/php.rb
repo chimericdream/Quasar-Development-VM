@@ -3,7 +3,7 @@ apt_repository 'php' do
   distribution node['lsb']['codename']
 end
 
-%w{php7.0 php7.0-curl php7.0-dev php7.0-gd php7.0-mcrypt php7.0-mysql php7.0-mysqlnd php7.0-odbc php7.0-pgsql php7.0-sqlite php7.0-sybase php7.0-tidy php7.0-xmlrpc php7.0-xsl gawk libapache2-mod-php7.0}.each do |a_package|
+%w{php7.0 php7.0-curl php7.0-dev php7.0-gd php7.0-mcrypt php7.0-mysql php7.0-mysqlnd php7.0-odbc php7.0-pgsql php7.0-sqlite php7.0-sybase php7.0-tidy php7.0-xmlrpc php7.0-xsl gawk libapache2-mod-php7.0 php7.0-bcmath}.each do |a_package|
   package a_package
 end
 
