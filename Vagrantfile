@@ -116,7 +116,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.omnibus.chef_version = '12.2.1'
+  config.omnibus.chef_version = '12.15.19'
 
   if Vagrant.has_plugin?("vagrant-proxyconf")
     config.proxy.http     = $http_proxy
@@ -131,6 +131,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.log_level = $chef_log_level
+
+    chef.channel = 'stable'
+    chef.version = '12.15.19'
 
     chef.json.merge!({
       :apache => {
@@ -152,18 +155,18 @@ Vagrant.configure("2") do |config|
       },
       :nodejs => {
         :install_method => 'source',
-        :version        => '4.4.3',
+        :version        => '6.9.1',
         :source         => {
-          :url      => "https://nodejs.org/dist/v4.4.3/node-v4.4.3.tar.gz",
-          :checksum => "8e67b95721aab7bd721179da2fe5dd97f9acc1306c15c9712ee103bcd6381638"
+          :url      => "https://nodejs.org/dist/v6.9.1/node-v6.9.1.tar.gz",
+          :checksum => "a98997ca3a4d10751f0ebe97839b2308a31ae884b4203cda0c99cf36bc7fe3bf"
         }
       },
       :npm => {
         :packages => $npm_array
       },
       "opscode-ruby" => {
-        :versions => ['1.9.3-p551', '2.0.0-p645', '2.1.6', '2.2.4', '2.3.0-dev', 'rbx-2.5.5'],
-        :global => '2.2.4'
+        :versions => ['1.9.3-p551', '2.0.0-p645', '2.1.6', '2.2.4', '2.3.1', '2.3.0-dev', 'rbx-2.5.5'],
+        :global => '2.3.1'
       },
       :php => {
         :timezone => "America/Chicago",

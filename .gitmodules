@@ -97,3 +97,6 @@
 [submodule "cookbooks/apache2"]
 	path = cookbooks/apache2
 	url = https://github.com/svanzoest-cookbooks/apache2.git
+[submodule "cookbooks/compat_resource"]
+	path = cookbooks/compat_resource
+	url = https://github.com/chef-cookbooks/compat_resource.git

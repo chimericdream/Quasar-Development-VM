@@ -42,8 +42,8 @@ package "libpcap-dev" do
   action :install
 end
 
-rbenv_ruby "Ruby 2.2.4" do
-  ruby_version "2.2.4"
+rbenv_ruby "Ruby 2.3.1" do
+  ruby_version "2.3.1"
   global true
 end
 
