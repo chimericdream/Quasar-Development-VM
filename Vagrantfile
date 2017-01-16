@@ -142,8 +142,11 @@ Vagrant.configure("2") do |config|
         :listen_ports => [$vm_http_port, "443"]
       },
       :java => {
-        :install_flavor => "openjdk",
-        :jdk_version => 7
+        :oracle => {
+          :accept_oracle_download_terms => true
+        },
+        :install_flavor => "oracle",
+        :jdk_version => 8
       },
       :mysql => {
         :port                   => $vm_mysql_port,
